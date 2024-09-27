@@ -32,7 +32,24 @@ $array_ida_autorizacion = array(
     )
 );
 
+$array_ida_anulacion = array(
+    'nro_referencia' => '12',
+    'IdMsj' => '12345',
+    'fecha' => '20240930',
+    'hora' => '14:35',
+    'prestador_codigo' => '123',
+    'financiador_codigo' => '270',
+    'credencial' => '987654321',
+    'dispensa_fecha' => '20240930',
+    'dispensa_hora' => '14:40'
+);
 
-$send = new Generador_XML('ida_autorizacion', $array_ida_autorizacion);
-$xml = $send->ida_autorizacion();
+$xml_generator = new Generador_XML();
+
+// ida autorización
+$xml = $xml_generator->ida_autorizacion($array_ida_autorizacion);
 file_put_contents('/import/validadores/call_ida_autorizacion.txt', print_r($xml, true));
+
+// ida anulación
+$xml = $xml_generator->ida_anulacion($array_ida_anulacion);
+file_put_contents('/import/validadores/call_ida_anulacion.txt', print_r($xml, true));

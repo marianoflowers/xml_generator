@@ -5,18 +5,14 @@ class Generador_XML
     private $_data;
     private $_generated_xml;
 
-    function __construct($opt, $data)
+    function __construct()
     {
-        $this->_data = $data;
-        switch ($opt) {
-            case 'ida_autorizacion':
-                $this->ida_autorizacion();
-                break;
-        }
+        // implementar si requiere
     }
 
-    function ida_autorizacion()
+    function ida_autorizacion($arrData)
     {
+        $this->_data = $arrData;
         $solicitud = "<?xml version='1.0' encoding='UTF-8'?>
                         <soapenv:Envelope xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/' xmlns:xsd='http://www.w3.org/2001/XMLSchema' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'>
                             <soapenv:Body>
@@ -106,6 +102,63 @@ class Generador_XML
                             </soapenv:Body>
                         </soapenv:Envelope>";
 
+        $this->_generated_xml = $solicitud;
+        return $this->_generated_xml;
+    }
+
+    function ida_anulacion($arrData){
+        $this->_data = $arrData;
+        $solicitud = "<?xml version='1.0' encoding='UTF-8'?>
+                        <soapenv:Envelope xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/' xmlns:xsd='http://www.w3.org/2001/XMLSchema' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'>
+                            <soapenv:Body>
+                                <validar>
+                                    <MensajeADESFA version='3.1.0'>
+                                        <EncabezadoMensaje>
+                                            <NroReferencia>{$this->_data['nro_referencia']}</NroReferencia>
+                                            <TipoMsj>200</TipoMsj>
+                                            <CodAccion>20010</CodAccion>
+                                            <IdMsj>{$this->_data['IdMsj']}</IdMsj>
+                                            <InicioTrx>
+                                                <Fecha>{$this->_data['fecha']}</Fecha>
+                                                <Hora>{$this->_data['hora']}</Hora>
+                                            </InicioTrx>
+                                            <Software>
+                                                <CodigoADESFA>0</CodigoADESFA>
+                                                <Nombre>Concentrador FACAF</Nombre>
+                                                <Version>1.0.0</Version>
+                                            </Software>
+                                            <Validador>
+                                                <CodigoADESFA>0</CodigoADESFA>
+                                                <Nombre>PAMI</Nombre>
+                                            </Validador>
+                                            <Prestador>
+                                                <CodigoADESFA>0</CodigoADESFA>
+                                                <Cuit>0</Cuit>
+                                                <Sucursal />
+                                                <Codigo>{$this->_data['prestador_codigo']}</Codigo>
+                                            </Prestador>
+                                        </EncabezadoMensaje>
+                                        <EncabezadoReceta>
+                                            <Financiador>
+                                                <CodigoADESFA>0</CodigoADESFA>
+                                                <Codigo>{$this->_data['financiador_codigo']}</Codigo>
+                                                <Sucursal>0</Sucursal>
+                                            </Financiador>
+                                            <Credencial>
+                                                <Numero>{$this->_data['credencial']}</Numero>
+                                                <Track>0</Track>
+                                                <ModoIngreso>A</ModoIngreso>
+                                            </Credencial>
+                                            <Dispensa>
+                                                <Fecha>{$this->_data['dispensa_fecha']}</Fecha>
+                                                <Hora>{$this->_data['dispensa_hora']}</Hora>
+                                            </Dispensa>
+                                        </EncabezadoReceta>
+                                    </MensajeADESFA>
+                                </validar>
+                            </soapenv:Body>
+                        </soapenv:Envelope>";
+        
         $this->_generated_xml = $solicitud;
         return $this->_generated_xml;
     }
