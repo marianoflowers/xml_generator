@@ -44,6 +44,7 @@ $array_ida_anulacion = array(
     'dispensa_hora' => '14:40'
 );
 
+$array_consulta_cobertura = 
 $xml_generator = new Generador_XML();
 
 // ida autorización
@@ -52,4 +53,8 @@ file_put_contents('/import/validadores/call_ida_autorizacion.txt', print_r($xml,
 
 // ida anulación
 $xml = $xml_generator->ida_anulacion($array_ida_anulacion);
+file_put_contents('/import/validadores/call_ida_anulacion.txt', print_r($xml, true));
+
+// ida consulta de cobertura
+$xml = $xml_generator->ida_consulta_cobertura($array_consulta_cobertura);
 file_put_contents('/import/validadores/call_ida_anulacion.txt', print_r($xml, true));
