@@ -260,4 +260,75 @@ class Generador_XML
         $this->_generated_xml = $solicitud;
         return $this->_generated_xml;
     }
+
+    function ida_receta_electronica_por_beneficiario($array_receta_electronica_por_beneficiario){
+        $this->_data = $array_receta_electronica_por_beneficiario;
+        $solicitud = "<?xml version='1.0' encoding='UTF-8'?>
+                        <soapenv:Envelope xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/' xmlns:xsd='http://www.w3.org/2001/XMLSchema' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'>
+                            <soapenv:Body>
+                                <validar>
+                                    <MensajeADESFA version='3.1.0'>
+                                        <EncabezadoMensaje>
+                                            <TipoMsj>200</TipoMsj>
+                                            <CodAccion>490220</CodAccion>
+                                            <IdMsj>{$this->_data['IdMsj']}</IdMsj>
+                                            <InicioTrx>
+                                                <Fecha>{$this->_data['fecha']}</Fecha>
+                                                <Hora>{$this->_data['hora']}</Hora>
+                                            </InicioTrx>
+                                            <Software>
+                                                <CodigoADESFA/>
+                                                <Nombre>Concentrador FACAF</Nombre>
+                                                <Version/>
+                                            </Software>
+                                            <Validador>
+                                                <CodigoADESFA/>
+                                                <Nombre/>
+                                            </Validador>
+                                            <Prestador>
+                                                <CodigoADESFA/>
+                                                <Cuit>0</Cuit>
+                                                <Sucursal/>
+                                                <RazonSocial/>
+                                                <Codigo>{$this->_data['prestador_codigo']}</Codigo>
+                                                <Vendedor/>
+                                            </Prestador>
+                                        </EncabezadoMensaje>
+                                        <EncabezadoReceta>
+                                            <Financiador>
+                                                <CodigoADESFA/>
+                                                <Codigo>{$this->_data['financiador_codigo']}</Codigo>
+                                                <Cuit>0</Cuit>
+                                                <Sucursal/>
+                                            </Financiador>
+                                            <Beneficiario>
+                                                <TipoDoc>DNI</TipoDoc>
+                                                <NroDoc>{$this->_data['nro_documento']}</NroDoc>
+                                                <Apellido/>
+                                                <Nombre/>
+                                                <Sexo/>
+                                                <FechaNacimiento/>
+                                                <Parentesco/>
+                                                <EdadUnidad/>
+                                                <Edad>0</Edad>
+                                            </Beneficiario>
+                                            <Credencial>
+                                                <Numero>{$this->_data['credencial']}</Numero>
+                                                <Track/>
+                                                <Version/>
+                                                <Vencimiento/>
+                                                <ModoIngreso/>
+                                                <EsProvisorio/>
+                                                <Plan></Plan>
+                                                <cvc2/>
+                                            </Credencial>
+                                        </EncabezadoReceta>
+                                    </MensajeADESFA>
+                                </validar>
+                            </soapenv:Body>
+                        </soapenv:Envelope>";
+
+        $this->_generated_xml = $solicitud;
+        return $this->_generated_xml;
+    }
 }

@@ -44,7 +44,49 @@ $array_ida_anulacion = array(
     'dispensa_hora' => '14:40'
 );
 
-$array_consulta_cobertura = 
+$array_consulta_cobertura = array(
+    'IdMsj' => '12345',
+    'fecha' => '20240930',
+    'hora' => '14:30:00',
+    'prestador_codigo' => '123',
+    'matricula' => 'P',
+    'provincia' => 'B',
+    'nro_matricula' => '12345',
+    'tipo_prescriptor' => 'M',
+    'financiador_codigo' => '270',
+    'credencial' => '15050441690900',
+    'fecha_receta' => '20240830',
+    'dispensa_fecha' => '20240930',
+    'dispensa_hora' => '15:00:00',
+    'formulario_fecha' => '20240830',
+    'formulario_nro' => '8240457338659',
+    'items' => array(
+        array(
+            'troquel' => '26365',
+            'alfabeta' => '26365',
+            'cant_solic' => '1',
+            'porcentaje' => '60'
+        ),
+        array(
+            'troquel' => '40423',
+            'alfabeta' => '26345',
+            'cant_solic' => '2',
+            'porcentaje' => '60'
+        )
+    )
+);
+
+$array_receta_electronica_por_beneficiario = array(
+    'IdMsj' => '123456',
+    'fecha' => '20240915',
+    'hora' => '14:30:00',
+    'prestador_codigo' => '78901',
+    'financiador_codigo' => '456789',
+    'nro_documento' => '32165498',
+    'credencial' => '15050441690900'
+);
+
+
 $xml_generator = new Generador_XML();
 
 // ida autorización
@@ -57,4 +99,8 @@ file_put_contents('/import/validadores/call_ida_anulacion.txt', print_r($xml, tr
 
 // ida consulta de cobertura
 $xml = $xml_generator->ida_consulta_cobertura($array_consulta_cobertura);
-file_put_contents('/import/validadores/call_ida_anulacion.txt', print_r($xml, true));
+file_put_contents('/import/validadores/call_ida_consulta_cobertura.txt', print_r($xml, true));
+
+// ida receta electronica por beneficiario
+$xml = $xml_generator->ida_receta_electronica_por_beneficiario($array_receta_electronica_por_beneficiario);
+file_put_contents('/import/validadores/call_receta_electronica_por_beneficiario.txt', print_r($xml, true));
