@@ -86,6 +86,15 @@ $array_receta_electronica_por_beneficiario = array(
     'credencial' => '15050441690900'
 );
 
+$array_receta_electronica = array(
+    'IdMsj' => '123456', 
+    'fecha' => '20240920',
+    'hora' => '10:45:00',
+    'prestador_codigo' => '12345',
+    'financiador_codigo' => '67890',
+    'credencial' => '15050441691234',
+    'formulario_nro' => '987654321'
+);
 
 $xml_generator = new Generador_XML();
 
@@ -104,3 +113,7 @@ file_put_contents('/import/validadores/call_ida_consulta_cobertura.txt', print_r
 // ida receta electronica por beneficiario
 $xml = $xml_generator->ida_receta_electronica_por_beneficiario($array_receta_electronica_por_beneficiario);
 file_put_contents('/import/validadores/call_receta_electronica_por_beneficiario.txt', print_r($xml, true));
+
+// ida receta electronica
+$xml = $xml_generator->ida_receta_electronica($array_receta_electronica);
+file_put_contents('/import/validadores/call_receta_electronica.txt', print_r($xml, true));
